@@ -33,7 +33,7 @@ TARGET_OTA_ASSERT_DEVICE := G2
 
 # File systems
 BOARD_HAS_LARGE_FILESYSTEM := true
-#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6256640 # This is the maximum known partition size, but it can be higher, so we just omit it
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6256640 # This is the maximum known partition size, but it can be higher, so we just omit it
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -58,7 +58,7 @@ TARGET_KERNEL_SOURCE := kernel/ireadygo/G2
 TARGET_KERNEL_CONFIG := G2_defconfig
 
 # Platform
-TARGET_BOARD_PLATFORM := 
+TARGET_BOARD_PLATFORM := mt6589
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
