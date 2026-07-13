@@ -1,37 +1,16 @@
-#
-# Copyright (C) 2020 The Android Open Source Project
-# Copyright (C) 2020 The TWRP Open Source Project
-# Copyright (C) 2020 SebaUbuntu's TWRP device tree generator
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-# Inherit from those products. Most specific first.
-$(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
-# Inherit from G2 device
+# 继承 Omni 通用配置
 $(call inherit-product, device/ireadygo/G2/device.mk)
-
-# Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
-$(call inherit-product, vendor/omni/config/gsm.mk)
 
-# Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := G2
+# 产品基本信息
 PRODUCT_NAME := omni_G2
-PRODUCT_BRAND := MUCH
-PRODUCT_MODEL := MUCH G2
+PRODUCT_DEVICE := G2
+PRODUCT_BRAND := ireadygo
 PRODUCT_MANUFACTURER := ireadygo
-PRODUCT_RELEASE_NAME := MUCH MUCH G2
+PRODUCT_MODEL := G2
+
+# 系统属性
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_DISPLAY_ID=CM-10.1 \
+    ro.product.name=omni_G2 \
+    ro.product.device=G2
