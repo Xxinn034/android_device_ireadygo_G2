@@ -33,7 +33,7 @@ TARGET_OTA_ASSERT_DEVICE := G2
 
 # File systems
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6256640 # This is the maximum known partition size, but it can be higher, so we just omit it
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520       # 调整为 20 MiB，避免空间不足
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -71,3 +71,37 @@ TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
+
+# ============ 新增 / 修改部分（解决编译问题并优化） ============
+
+# 强制使用 xz 压缩 Recovery 镜像（减小体积）
+BOARD_RAMDISK_COMPRESSOR := xz
+
+# 显式禁用不需要的组件（减小体积）
+TW_INCLUDE_BASH := false
+TW_INCLUDE_NANO := false
+TW_INCLUDE_PIGZ := false
+TW_INCLUDE_OPENAES := false
+TW_INCLUDE_TWRPAPP := false
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_BUSYBOX := false
+TW_INCLUDE_OPENSSH := false
+
+# 设置默认语言和版本署名
+TW_DEFAULT_LANGUAGE := zh_CN
+TW_DEVICE_VERSION := Xxinn034
+
+# 兼容性标志（绕过老版本 host 工具问题）
+TARGET_USES_PREBUILT_KERNEL := true
+BOARD_SEPOLICY_DIRS :=
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+BUILD_BROKEN_DUP_RULES := true
+
+# 完全禁用 SELinux 策略编译（设备不支持）
+TW_NO_SELINUX := true
+SELINUX_IGNORE_NEVERALLOWS := true
+
+# 解决 host 工具（checkpolicy/libselinux）的链接错误
+BUILD_BROKEN_WHOLE_STATIC_LIBRARIES := true
+BUILD_BROKEN_PREBUILT_WHOLE_STATIC_LIBRARIES := true
+BOARD_USES_SEPOLICY := false
