@@ -18,3 +18,16 @@
 
 LOCAL_PATH := device/ireadygo/G2
 
+# 包含 BoardConfig
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/zImage-dtb
+endif
+
+# 设备分区配置
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/root/init.rc:root/init.rc
+
+# 告诉编译系统这是 recovery 设备
+PRODUCT_PACKAGES += \
+    recovery
+
